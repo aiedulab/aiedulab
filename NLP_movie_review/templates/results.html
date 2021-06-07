@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>영화 분류</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+
+<center>
+<img src="https://live.staticflickr.com/1833/43282500464_a5a5188ce6_b.jpg" width=40%></img>
+<h3>입력한 영화 리뷰:</h3>
+<div>{{ content }}</div>
+
+<h3>Prediction:</h3>
+<div>이 영화 리뷰는 <strong>{{ prediction == 1 and '긍정' or '부정' }}</strong>적입니다.
+	 (확률: {{ probability }}%)</div>
+<br>
+<br>
+<div id='button'>
+	  <form action="/">
+	    <input type=submit value='추가 입력'>
+	  </form>
+</div>
+</center>
+
+  </body>
+</html>
