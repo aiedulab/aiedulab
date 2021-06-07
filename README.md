@@ -1,4 +1,4 @@
-🌱 AI datasets, models for education only
+🌱 AI datasets, models and some source codes for education only
 <!---
 - 👋 Hi, I’m @swedulab
 - 👀 I’m interested in AI SW development and education.
