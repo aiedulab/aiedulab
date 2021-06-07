@@ -1,4 +1,4 @@
-🌱 AI 교육 관련 dataset, model을 모았습니다.
+🌱 AI datasets, models for education only
 <!---
 - 👋 Hi, I’m @swedulab
 - 👀 I’m interested in AI SW development and education.
