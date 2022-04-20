@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <title>타이타닉 생존자 예측</title>
+  </head>
+  <body>
+
+  <center>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/1024px-RMS_Titanic_3.jpg" width=30%></img>
+  <h2>특징을 입력하고 생존 유무를 예측해보세요.</h2>
+
+  <form method=post action="/results">
+  <table>
+      <tbody>
+          <tr>
+              <td bgcolor='#bbdefb'>Pclass(1/2/3)</td>
+              <td><input type = "number" name = "Pclass" min="1" max="3" value="1" /></td>
+              <td>(티켓 클래스(default:1))</td>
+          </tr>
+          <tr>
+              <td bgcolor='#bbdefb'>Sex(male:0/female:1)</td>
+              <td><input type = "number" name = "Sex" min="0" max="1" value="1" /></td>
+              <td>(성별(default:1)) </td>
+          </tr>
+          <tr>
+              <td bgcolor='#bbdefb'>Age</td>
+              <td><input type = "number" name = "Age" min="0" value="10" /></td>
+              <td> (나이(default:10)) </td>
+          </tr>
+          <tr>
+              <td bgcolor='#bbdefb'>SibSp</td>
+              <td><input type = "number" name = "SibSp" min="0" value="0" /></td>
+              <td> (함께 탑승한 형제자매, 배우자 수 총합(default:0))</td>
+           </tr>
+          <tr>
+              <td bgcolor='#bbdefb'>Parch</td>
+              <td><input type = "number" name = "Parch" min="0" value="2" /></td>
+              <td> (함께 탑승한 부모, 자녀 수 총합(default:2)) </td>
+          </tr>
+          <tr>
+              <td bgcolor='#bbdefb'>Fare</td>
+              <td><input type = "number" name = "Fare" min="0" value="20" /> </td>
+              <td>(탑승 요금(default:20)) </td>
+           </tr>
+          <tr>
+              <td bgcolor='#bbdefb'>Embarked(S:0/C:1/Q:2)</td>
+              <td><input type = "number" name = "Embarked" min="0" max="2" value="0" /> </td>
+              <td>(탑승 항구(default:0)) </td>
+          </tr>
+      </tbody>
+  </table>
+  <!-- <p><input type=submit style="background-color:#003366; color:white" value='입력' ></p> -->
+  <p><input type=submit value='입력(클릭)' ></p>
+  </form>
+
+  </center>
+
+  </body>
+</html>
