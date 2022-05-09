@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>챗봇 답변</title>
+  </head>
+  <body>
+
+  <center>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Chatbot.jpg" width=30%></img>
+  <h3>입력한 문장:</h3>
+  <div>
+    {{ content }}
+  </div>
+
+  <h3>답변:</h3>
+  <div><strong>{{ prediction }}</strong>
+  </div>
+  <br>
+  <br>
+  <div id='button'>
+	  <form action="/">
+	    <input type=submit value='다시 입력'>
+	  </form>
+  </div>
+  </center>
+
+  </body>
+</html>
