@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>리뷰 분석</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+
+<center>
+<img src="https://images.unsplash.com/photo-1592417817038-d13fd7342605?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" width=40%></img>
+<h2>음식에 대한 리뷰를 써 주세요!</h2>
+
+{% from "_formhelpers.html" import render_field %}
+
+<form method=post action="/results">
+  <dl>
+	{{ render_field(form.moviereview, cols='30', rows='10') }}
+  </dl>
+  <div>
+	  <input type=submit value='입력' name='submit_btn'>
+  </div>
+</form>
+</center>
+
+  </body>
+</html>

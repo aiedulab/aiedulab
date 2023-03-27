@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>리뷰 분석</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+
+<center>
+<img src="https://images.unsplash.com/photo-1592417817038-d13fd7342605?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" width=40%></img>
+<h3>입력한 음식 리뷰:</h3>
+<div>{{ content }}</div>
+
+<h3>Prediction:</h3>
+<div>이 음식 리뷰는 <strong>{{ prediction == 1 and '긍정' or '부정' }}</strong>적입니다.
+	 (확률: {{ probability }}%)</div>
+<br>
+<br>
+<div id='button'>
+	  <form action="/">
+	    <input type=submit value='추가 입력'>
+	  </form>
+</div>
+</center>
+
+  </body>
+</html>
