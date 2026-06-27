@@ -1,32 +1,231 @@
 <!doctype html>
-<html>
+<html lang="ko">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>타이타닉 생존자 예측 결과</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --card: #ffffff;
+        --text: #172033;
+        --muted: #667085;
+        --primary: #1d4ed8;
+        --primary-dark: #1e40af;
+        --success: #047857;
+        --danger: #b42318;
+        --success-bg: #ecfdf3;
+        --danger-bg: #fff1f3;
+        --line: #e4e7ec;
+        --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(29, 78, 216, 0.14), transparent 32rem),
+          linear-gradient(135deg, #eef4ff 0%, var(--bg) 48%, #f8fafc 100%);
+      }
+
+      .page {
+        width: min(920px, 92vw);
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+
+      .card {
+        overflow: hidden;
+        border-radius: 28px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        filter: saturate(0.9) contrast(1.05);
+      }
+
+      .content {
+        padding: 34px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--primary);
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0 0 22px;
+        font-size: clamp(1.8rem, 4vw, 2.7rem);
+        line-height: 1.2;
+      }
+
+      .prediction {
+        margin-bottom: 28px;
+        padding: 22px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: #f8fafc;
+      }
+
+      .prediction-label {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .prediction-result {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        padding: 10px 16px;
+        border-radius: 999px;
+        font-size: 1.25rem;
+        font-weight: 900;
+      }
+
+      .survived {
+        color: var(--success);
+        background: var(--success-bg);
+      }
+
+      .not-survived {
+        color: var(--danger);
+        background: var(--danger-bg);
+      }
+
+      .section-title {
+        margin: 0 0 12px;
+        font-size: 1.1rem;
+      }
+
+      .feature-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+      }
+
+      .feature-table th,
+      .feature-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+
+      .feature-table th {
+        width: 38%;
+        background: #f8fafc;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .feature-table tr:last-child th,
+      .feature-table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 170px;
+        height: 50px;
+        padding: 0 22px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 12px 24px rgba(29, 78, 216, 0.25);
+        transition: transform 0.16s ease, background 0.16s ease;
+      }
+
+      .button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      @media (max-width: 700px) {
+        .page { padding: 24px 0; }
+        .content { padding: 24px; }
+        .hero-image { height: 180px; }
+        .feature-table th,
+        .feature-table td {
+          display: block;
+          width: 100%;
+        }
+        .feature-table th { padding-bottom: 6px; }
+        .feature-table td { padding-top: 6px; }
+        .actions { justify-content: stretch; }
+        .button { width: 100%; }
+      }
+    </style>
   </head>
   <body>
+    <main class="page">
+      <section class="card" aria-labelledby="page-title">
+        <img
+          class="hero-image"
+          src="https://upload.wikimedia.org/wikipedia/commons/f/fd/RMS_Titanic_3.jpg"
+          alt="RMS Titanic"
+        />
 
-  <center>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/RMS_Titanic_3.jpg" width=30%></img>
-  <h3>입력한 특징:</h3>
-  <div>
-      <p> |
-          {% for key,value in content.items() %}
-          {{key}} : {{value}} | 
-          {% endfor %}
-      </p>
-  </div>
+        <div class="content">
+          <p class="eyebrow">Prediction Result</p>
+          <h1 id="page-title">예측 결과</h1>
 
-  <h3>Prediction:</h3>
-  <div><strong>{{ prediction == 1 and '생존' or '사망' }}</strong>으로 예측했습니다.
-  </div>
-  <br>
-  <br>
-  <div id='button'>
-	  <form action="/">
-	    <input type=submit value='다시 입력'>
-	  </form>
-  </div>
-  </center>
+          <section class="prediction" aria-label="생존 예측 결과">
+            <p class="prediction-label">모델 예측</p>
+            {% if prediction == 1 %}
+              <p class="prediction-result survived">생존으로 예측했습니다</p>
+            {% else %}
+              <p class="prediction-result not-survived">사망으로 예측했습니다</p>
+            {% endif %}
+          </section>
 
+          <section aria-labelledby="feature-title">
+            <h2 class="section-title" id="feature-title">입력한 특징</h2>
+            <table class="feature-table">
+              <tbody>
+                {% for key, value in content.items() %}
+                  <tr>
+                    <th scope="row">{{ key }}</th>
+                    <td>{{ value }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </section>
+
+          <div class="actions">
+            <a class="button" href="/">다시 입력하기</a>
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
